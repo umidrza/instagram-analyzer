@@ -1,4 +1,4 @@
-import UploadCard from "@/components/upload/upload-card";
+import UploadCard from "@/components/upload/UploadCard";
 
 export default function Home() {
   return (
