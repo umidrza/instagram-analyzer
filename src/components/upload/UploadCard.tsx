@@ -1,14 +1,18 @@
 "use client";
 
 import { useRef, useState } from "react";
+import type { InstagramData } from "@/types/instagram";
 import type { UploadedFile } from "@/types/upload";
-import { readZip } from "@/lib/instagram/readZip";
+import { parseFile } from "@/lib/instagram/parser";
 
 export default function UploadCard() {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [uploadedFile, setUploadedFile] =
         useState<UploadedFile | null>(null);
+        
+    const [parsedData, setParsedData] =
+        useState<InstagramData | null>(null);
 
     async function handleFile(file: File) {
         if (!file.name.endsWith(".zip")) {
@@ -16,10 +20,9 @@ export default function UploadCard() {
             return;
         }
 
-        const files = await readZip(file);
+        const data = await parseFile(file);
 
-        console.log(files);
-
+        setParsedData(data);
         setUploadedFile({
             file,
             name: file.name,
@@ -79,12 +82,69 @@ export default function UploadCard() {
             </div>
 
             {uploadedFile && (
-                <div className="mt-6 rounded-lg bg-neutral-800 p-4">
-                    <div>{uploadedFile.name}</div>
+                <div className="mt-6 space-y-4 rounded-lg bg-neutral-800 p-4">
 
-                    <div className="text-sm text-neutral-400">
-                        {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB
-                    </div>
+                    {parsedData && (
+                        <div className="space-y-3">
+                            <div className="grid gap-3 sm:grid-cols-3">
+                                <div className="rounded-lg bg-neutral-700/60 p-3">
+                                    <div className="text-xs uppercase tracking-wide text-neutral-400">
+                                        Followers
+                                    </div>
+                                    <div className="mt-1 text-lg font-semibold text-white">
+                                        {parsedData.followers.length}
+                                    </div>
+                                </div>
+
+                                <div className="rounded-lg bg-neutral-700/60 p-3">
+                                    <div className="text-xs uppercase tracking-wide text-neutral-400">
+                                        Following
+                                    </div>
+                                    <div className="mt-1 text-lg font-semibold text-white">
+                                        {parsedData.following.length}
+                                    </div>
+                                </div>
+
+                                <div className="rounded-lg bg-neutral-700/60 p-3">
+                                    <div className="text-xs uppercase tracking-wide text-neutral-400">
+                                        Pending requests
+                                    </div>
+                                    <div className="mt-1 text-lg font-semibold text-white">
+                                        {parsedData.pendingRequests.length}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {parsedData.pendingRequests.length > 0 ? (
+                                <div>
+                                    <div className="mb-2 text-sm font-semibold text-white">
+                                        Pending requests
+                                    </div>
+                                    <ul className="max-h-40 space-y-2 overflow-auto">
+                                        {parsedData.pendingRequests.map((user) => (
+                                            <li
+                                                key={user.href || user.username}
+                                                className="rounded-lg bg-neutral-700/60 px-3 py-2 text-sm"
+                                            >
+                                                <div className="font-medium text-white">
+                                                    {user.username}
+                                                </div>
+                                                {user.href && (
+                                                    <div className="text-xs text-neutral-400">
+                                                        {user.href}
+                                                    </div>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ) : (
+                                <div className="text-sm text-neutral-400">
+                                    No pending requests found.
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
