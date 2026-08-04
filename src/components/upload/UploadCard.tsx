@@ -16,9 +16,9 @@ export default function UploadCard() {
             return;
         }
 
-        const buffer = await readZip(file);
+        const files = await readZip(file);
 
-        console.log(buffer);
+        console.log(files);
 
         setUploadedFile({
             file,
