@@ -4,29 +4,30 @@ import { readZip } from "@/utils/readZip";
 export async function loadInstagramExport(
   file: File
 ): Promise<InstagramDocuments> {
-  const docs = await readZip(file);
+  const archive = await readZip(file);
 
   const documents: InstagramDocuments = {
     followers: [],
   };
 
-  for (const doc of docs) {
-    const name = doc.name;
-    const data = doc.data
+  if (archive.hasName("following.json")) {
+    documents.following =
+      archive.getJsonByName<InstagramDocuments["following"]>(
+        "following.json"
+      );
+  }
 
-    switch (name) {
-      case "following.json":
-        documents.following = data as InstagramDocuments["following"];
-        break;
+  if (archive.hasName("pending_follow_requests.json")) {
+    documents.pendingRequests =
+      archive.getJsonByName<InstagramDocuments["pendingRequests"]>(
+        "pending_follow_requests.json"
+      );
+  }
 
-      case "pending_follow_requests.json":
-        documents.pendingRequests = data as InstagramDocuments["pendingRequests"];
-        break;
-    }
-
-    if (/followers_\d+\.json$/i.test(name ?? "")) {
-      documents.followers.push(...(data as InstagramDocuments["followers"]));
-    }
+  for (const path of archive.find(/followers_\d+\.json$/i)) {
+    documents.followers.push(
+      ...archive.getJson<InstagramDocuments["followers"]>(path)
+    );
   }
 
   return documents;

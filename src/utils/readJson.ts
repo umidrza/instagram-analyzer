@@ -1,5 +1,8 @@
-export function readJson<T>(content: Uint8Array): T {
-  const text = new TextDecoder().decode(content);
+import { ZipArchive } from "./archive";
 
-  return JSON.parse(text);
+export function readJson<T>(
+  archive: ZipArchive,
+  path: string
+) {
+  return archive.getJson<T>(path);
 }
