@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 import type { AnalysisResult, InstagramUser } from "@/types/domain";
 import SearchInput from "./SearchInput";
-import UserTabs from "./UserTabs";
 import UserTable from "./UserTable";
 import StatsGrid from "./StatsGrid";
 
@@ -35,17 +34,11 @@ export default function Dashboard({ data }: Props) {
 
   return (
     <div className="space-y-6">
-      {/* <StatsGrid data={data} /> */}
+      <div className="rounded-2xl border border-neutral-800 bg-neutral-900/80 p-4 shadow-lg shadow-black/20 sm:p-6">
+        <StatsGrid data={data} selected={tab} onSelect={setTab} />
+      </div>
 
-      <UserTabs
-        selected={tab}
-        onChange={setTab}
-      />
-
-      <SearchInput
-        value={query}
-        onChange={setQuery}
-      />
+      <SearchInput value={query} onChange={setQuery} />
 
       <UserTable users={users} />
     </div>

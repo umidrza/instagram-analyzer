@@ -1,16 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import type { AnalysisResult } from "@/types/domain";
 import { parseFile } from "@/lib/instagram/parser";
 import { analyzeConnections } from "@/lib/instagram/analysis/analyze";
-import Dashboard from "../dashboard";
 
-export default function UploadCard() {
+interface Props {
+    onAnalysisComplete: (analysis: AnalysisResult) => void;
+}
+
+export default function UploadCard({ onAnalysisComplete }: Props) {
     const inputRef = useRef<HTMLInputElement>(null);
-
-    const [analysis, setAnalysis] =
-        useState<AnalysisResult | null>(null);
 
     async function handleFile(file: File) {
         if (!file.name.endsWith(".zip")) {
@@ -19,10 +19,9 @@ export default function UploadCard() {
         }
 
         const data = await parseFile(file);
-
         const result = analyzeConnections(data);
 
-        setAnalysis(result);
+        onAnalysisComplete(result);
     }
 
     function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -75,11 +74,6 @@ export default function UploadCard() {
             <div className="mt-6 rounded-lg border border-dashed border-neutral-700 p-8 text-center text-neutral-400">
                 Drag & Drop ZIP Here
             </div>
-
-            {analysis && (
-                <Dashboard data={analysis} />
-            )}
-
         </div>
     );
 }
