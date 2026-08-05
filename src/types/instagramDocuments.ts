@@ -8,6 +8,11 @@ interface InstagramEntry {
   string_list_data: InstagramStringData[];
 }
 
+interface FollowingEntry {
+  string_list_data: InstagramStringData[];
+  title: string;
+}
+
 export interface InstagramLabelValue {
   label: string;
   value: string;
@@ -19,7 +24,7 @@ export interface PendingRequestsDocument {
 }
 
 interface FollowingDocument {
-  relationships_following: InstagramEntry[];
+  relationships_following: FollowingEntry[];
 }
 
 

@@ -6,11 +6,10 @@ export function parseFollowing(
 ): InstagramUser[] {
   if (!docs.following) return [];
 
-  return docs.following.relationships_following.map(({ string_list_data }) => {
+  return docs.following.relationships_following.map(({ string_list_data, title }) => {
     const [user] = string_list_data;
-
     return {
-      username: user.value,
+      username: title,
       href: user.href,
       timestamp: user.timestamp,
     };
