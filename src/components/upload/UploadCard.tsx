@@ -2,10 +2,9 @@
 
 import { useRef, useState } from "react";
 import type { AnalysisResult } from "@/types/domain";
-import type { UploadedFile } from "@/types/upload";
 import { parseFile } from "@/lib/instagram/parser";
 import { analyzeConnections } from "@/lib/instagram/analysis/analyze";
-import StatsGrid from "../dashboard/StatsGrid";
+import Dashboard from "../dashboard";
 
 export default function UploadCard() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +77,7 @@ export default function UploadCard() {
             </div>
 
             {analysis && (
-                <StatsGrid data={analysis} />
+                <Dashboard data={analysis} />
             )}
 
         </div>

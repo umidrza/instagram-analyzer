@@ -7,7 +7,7 @@ export default function StatsGrid({
   data: AnalysisResult;
 }) {
   return (
-    <div className="grid gap-4 md:grid-cols-5">
+    <div className="grid gap-4 md:grid-cols-6">
 
       <StatCard
         title="Followers"
