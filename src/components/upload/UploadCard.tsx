@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { AnalysisResult } from "@/types/domain";
 import { analyzeInstagram } from "@/lib/instagram/analyzeInstagram";
 
@@ -10,22 +10,28 @@ interface Props {
 
 export default function UploadCard({ onAnalysisComplete }: Props) {
     const inputRef = useRef<HTMLInputElement>(null);
+    const [error, setError] = useState<string | null>(null);
 
     async function handleFile(file: File) {
-        if (!file.name.endsWith(".zip")) {
-            alert("Please upload a ZIP file.");
-            return;
+        try {
+            const result = await analyzeInstagram(file);
+            onAnalysisComplete(result);
+
+            setError(null);
+        } catch (err) {
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Failed to read the Instagram export.");
+            }
         }
-
-        const result = await analyzeInstagram(file);
-
-        onAnalysisComplete(result);
     }
 
     function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
 
         if (!file) {
+            setError("No file selected.");
             return;
         }
 
@@ -35,9 +41,10 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
     function onDrop(e: React.DragEvent<HTMLDivElement>) {
         e.preventDefault();
 
-        const file = e.dataTransfer.files[0];
+        const file = e.dataTransfer.files?.[0];
 
         if (!file) {
+            setError("No file was dropped.");
             return;
         }
 
@@ -57,6 +64,12 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
             <p className="mt-2 text-neutral-400">
                 Everything is processed locally.
             </p>
+
+            {error && (
+                <p className="mt-2 text-sm text-red-600">
+                    {error}
+                </p>
+            )}
 
             <input
                 ref={inputRef}
