@@ -34,11 +34,11 @@ export function validateExport(
     throw new InvalidInstagramExportError();
   }
 
-  if (!exportData.following) {
-    throw new MissingFileError(
-      "following.json missing"
-    );
-  }
+  // if (!exportData.following) {
+  //   throw new MissingFileError(
+  //     "following.json missing"
+  //   );
+  // }
 
   if (!exportData.followers) {
     throw new MissingFileError(
@@ -46,9 +46,9 @@ export function validateExport(
     );
   }
 
-  if (!exportData.pendingRequests) {
-    throw new MissingFileError(
-      "pending requests not found"
-    );
-  }
+  // if (!exportData.pendingRequests) {
+  //   throw new MissingFileError(
+  //     "pending requests not found"
+  //   );
+  // }
 }
