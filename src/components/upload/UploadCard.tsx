@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, useState } from "react";
 import type { AnalysisResult } from "@/types/domain";
 import { analyzeInstagram } from "@/lib/instagram/analyzeInstagram";
@@ -110,6 +111,13 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
                     ? "Processing your Instagram export..."
                     : "Drag & Drop ZIP Here"}
             </div>
+
+            <p className="mt-4 text-center text-sm text-neutral-500">
+                Need help getting the ZIP file?{' '}
+                <Link href="/how-to-export" className="font-medium text-blue-400 hover:text-blue-300">
+                    Follow this guide
+                </Link>
+            </p>
         </div>
     );
 }

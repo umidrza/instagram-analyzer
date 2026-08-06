@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instagram Analyzer
 
-## Getting Started
+Instagram Analyzer is a modern web app for uploading your Instagram data export ZIP file and getting a clear breakdown of your follower and following relationships. It is built with Next.js, React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## What it does
 
-```bash
+- Upload an Instagram ZIP export
+- Parse follower and following data locally in the browser
+- Show a dashboard with key stats and insights
+- Provide a step-by-step guide for downloading your Instagram archive
+
+> Your Instagram data is processed locally in the browser, so it does not need to be sent to a server.
+
+## Tech stack
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS
+- fflate for ZIP handling
+
+## Getting started
+
+### 1. Install dependencies
+
+\`\`\`bash
+npm install
+\`\`\`
+
+### 2. Run the development server
+
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+\`\`\`bash
+npm run build
+\`\`\`
 
-## Learn More
+## How to use
 
-To learn more about Next.js, take a look at the following resources:
+1. Download your Instagram data archive from Instagram.
+2. Upload the ZIP file in the app.
+3. Wait for the analysis to complete.
+4. Review the dashboard results.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you need help finding the export file, use the guide page in the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
+- src/app - app routes and pages
+- src/components - UI components such as the upload card and dashboard
+- src/lib/instagram - parsing and analysis logic for Instagram exports
+- src/types - shared TypeScript types
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- The main entry page is the uploader experience.
+- The export help page is available at /how-to-export.
+- The app is designed to work entirely client-side for uploaded ZIP files.
+
+## Useful commands
+
+\`\`\`bash
+npm run dev
+npm run build
+npm run lint
+\`\`\`
