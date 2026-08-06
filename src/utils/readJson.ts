@@ -1,4 +1,4 @@
-import { ZipArchive } from "./archive";
+import type { ZipArchive } from "./archive";
 
 export function readJson<T>(
   archive: ZipArchive,

@@ -1,5 +1,5 @@
-import { AnalysisResult } from "@/types/domain";
-import { InstagramData } from "@/types/instagram";
+import type { AnalysisResult } from "@/types/domain";
+import type { InstagramData } from "@/types/instagram";
 
 export function analyzeConnections(data: InstagramData): AnalysisResult {
   

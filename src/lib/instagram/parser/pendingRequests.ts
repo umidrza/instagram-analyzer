@@ -2,7 +2,9 @@ import type { InstagramDocuments } from "@/types/instagramDocuments";
 import type { InstagramUser } from "@/types/instagram";
 
 export function parsePendingRequests(docs: InstagramDocuments): InstagramUser[] {
-    if (!docs.pendingRequests) return [];
+    if (!docs.pendingRequests) {
+        return [];
+    }
 
     return docs.pendingRequests.map((item) => {
         const labels = Object.fromEntries(

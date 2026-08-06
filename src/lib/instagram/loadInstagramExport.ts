@@ -1,5 +1,5 @@
 import type { InstagramDocuments } from "@/types/instagramDocuments";
-import { ZipArchive } from "@/utils/archive";
+import type { ZipArchive } from "@/utils/archive";
 
 export async function loadInstagramExport(
   archive: ZipArchive

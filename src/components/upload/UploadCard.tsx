@@ -25,7 +25,9 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
     function onInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         const file = e.target.files?.[0];
 
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         handleFile(file);
     }
@@ -35,7 +37,9 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
 
         const file = e.dataTransfer.files[0];
 
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         handleFile(file);
     }

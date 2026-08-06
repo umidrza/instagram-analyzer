@@ -4,7 +4,9 @@ import type { InstagramUser } from "@/types/instagram";
 export function parseFollowing(
   docs: InstagramDocuments
 ): InstagramUser[] {
-  if (!docs.following) return [];
+  if (!docs.following) {
+    return [];
+  }
 
   return docs.following.relationships_following.map(({ string_list_data, title }) => {
     const [user] = string_list_data;
