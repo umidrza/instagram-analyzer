@@ -1,72 +1,92 @@
 # Instagram Analyzer
 
-Instagram Analyzer is a modern web app for uploading your Instagram data export ZIP file and getting a clear breakdown of your follower and following relationships. It is built with Next.js, React, TypeScript, and Tailwind CSS.
+Instagram Analyzer is a privacy-first web application that helps you analyze your Instagram data export. Upload your Instagram ZIP archive to discover unfollowers, accounts you don't follow back, pending follow requests, and other relationship insights.
 
-## What it does
+All processing happens locally in your browser. Your Instagram data is **never uploaded or stored on a server**.
 
-- Upload an Instagram ZIP export
-- Parse follower and following data locally in the browser
-- Show a dashboard with key stats and insights
-- Provide a step-by-step guide for downloading your Instagram archive
+## ✨ Features
 
-> Your Instagram data is processed locally in the browser, so it does not need to be sent to a server.
+* Analyze your Instagram data export
+* View followers and following lists
+* Find people who don't follow you back
+* Find accounts you don't follow back
+* View pending follow requests
+* Fast, client-side ZIP parsing
+* No account login required
+* No server-side data storage
 
-## Tech stack
+## 🔒 Privacy
 
-- Next.js 16
-- React 19
-- TypeScript
-- Tailwind CSS
-- fflate for ZIP handling
+Your privacy comes first.
 
-## Getting started
+* Your Instagram ZIP file is processed entirely in your browser.
+* No personal data is uploaded to any server.
+* No Instagram credentials are required.
+* Nothing is stored after you close the page.
 
-### 1. Install dependencies
+## 🛠 Tech Stack
 
-\`\`\`bash
+* Next.js 16
+* React 19
+* TypeScript
+* Tailwind CSS
+* fflate (ZIP extraction)
+
+## 🚀 Getting Started
+
+### Install dependencies
+
+```bash
 npm install
-\`\`\`
+```
 
-### 2. Run the development server
+### Start the development server
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
-Then open http://localhost:3000 in your browser.
+Open **http://localhost:3000** in your browser.
 
-### 3. Build for production
+### Build for production
 
-\`\`\`bash
+```bash
 npm run build
-\`\`\`
+```
 
-## How to use
+## 📦 Usage
 
-1. Download your Instagram data archive from Instagram.
-2. Upload the ZIP file in the app.
-3. Wait for the analysis to complete.
-4. Review the dashboard results.
+1. Request and download your Instagram data from Instagram.
+2. Choose the **JSON** export format when requesting your data.
+3. Download the ZIP archive once Instagram has prepared it.
+4. Upload the ZIP file to Instagram Analyzer.
+5. Explore your follower insights.
 
-If you need help finding the export file, use the guide page in the app.
+Need help? Visit the **/how-to-export** guide inside the app.
 
-## Project structure
+## 📁 Project Structure
 
-- src/app - app routes and pages
-- src/components - UI components such as the upload card and dashboard
-- src/lib/instagram - parsing and analysis logic for Instagram exports
-- src/types - shared TypeScript types
+```
+src/
+├── app/                 # App Router pages
+├── components/          # UI components
+├── lib/
+│   └── instagram/       # ZIP parsing and analysis logic
+├── types/               # Shared TypeScript types
+└── utils/               # Utility functions
+```
 
-## Development notes
+## 💻 Available Scripts
 
-- The main entry page is the uploader experience.
-- The export help page is available at /how-to-export.
-- The app is designed to work entirely client-side for uploaded ZIP files.
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run lint     # Run ESLint
+```
 
-## Useful commands
+## 🤝 Contributing
 
-\`\`\`bash
-npm run dev
-npm run build
-npm run lint
-\`\`\`
+Contributions, issues, and feature requests are welcome.
+
+Feel free to open an issue or submit a pull request.
+
