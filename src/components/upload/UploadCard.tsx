@@ -2,8 +2,7 @@
 
 import { useRef } from "react";
 import type { AnalysisResult } from "@/types/domain";
-import { parseFile } from "@/lib/instagram/parser";
-import { analyzeConnections } from "@/lib/instagram/analysis/analyze";
+import { analyzeInstagram } from "@/lib/instagram/analyzeInstagram";
 
 interface Props {
     onAnalysisComplete: (analysis: AnalysisResult) => void;
@@ -18,8 +17,7 @@ export default function UploadCard({ onAnalysisComplete }: Props) {
             return;
         }
 
-        const data = await parseFile(file);
-        const result = analyzeConnections(data);
+        const result = await analyzeInstagram(file);
 
         onAnalysisComplete(result);
     }

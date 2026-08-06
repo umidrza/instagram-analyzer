@@ -1,14 +1,13 @@
 import type { InstagramData } from "@/types/instagram";
+import type { InstagramDocuments } from "@/types/instagramDocuments";
 import { parseFollowers } from "./followers";
 import { parseFollowing } from "./following";
 import { parsePendingRequests } from "./pendingRequests";
-import { loadInstagramExport } from "../loadInstagramExport";
 
-export async function parseFile(file: File): Promise<InstagramData> {
-    const data = await loadInstagramExport(file);
+export async function parseFile(docs: InstagramDocuments): Promise<InstagramData> {
     return {
-        followers: parseFollowers(data),
-        following: parseFollowing(data),
-        pendingRequests: parsePendingRequests(data),
+        followers: parseFollowers(docs),
+        following: parseFollowing(docs),
+        pendingRequests: parsePendingRequests(docs),
     };
 }

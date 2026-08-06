@@ -1,10 +1,9 @@
 import type { InstagramDocuments } from "@/types/instagramDocuments";
-import { readZip } from "@/utils/readZip";
+import { ZipArchive } from "@/utils/archive";
 
 export async function loadInstagramExport(
-  file: File
+  archive: ZipArchive
 ): Promise<InstagramDocuments> {
-  const archive = await readZip(file);
 
   const documents: InstagramDocuments = {
     followers: [],
