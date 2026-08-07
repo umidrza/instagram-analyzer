@@ -1,13 +1,25 @@
 import type { InstagramDocuments } from "@/types/instagramDocuments";
 import type { ZipArchive } from "@/utils/archive";
+import { InvalidArchiveError } from "./errors";
 
 export async function loadInstagramExport(
   archive: ZipArchive
 ): Promise<InstagramDocuments> {
+  const documents: InstagramDocuments = { followers: [] };
 
-  const documents: InstagramDocuments = {
-    followers: [],
-  };
+  const followerPaths = archive.find(/followers(_\d+)?\.json$/i);
+
+  if (followerPaths.length === 0) {
+    throw new InvalidArchiveError(
+      "The ZIP archive does not contain any Instagram followers export files."
+    );
+  }
+
+  for (const path of followerPaths) {
+    documents.followers.push(
+      ...archive.getJson<InstagramDocuments["followers"]>(path)
+    );
+  }
 
   if (archive.hasName("following.json")) {
     documents.following =
@@ -21,12 +33,6 @@ export async function loadInstagramExport(
       archive.getJsonByName<InstagramDocuments["pendingRequests"]>(
         "pending_follow_requests.json"
       );
-  }
-
-  for (const path of archive.find(/followers_\d+\.json$/i)) {
-    documents.followers.push(
-      ...archive.getJson<InstagramDocuments["followers"]>(path)
-    );
   }
 
   return documents;

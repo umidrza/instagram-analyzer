@@ -1,16 +1,21 @@
 export interface InstagramUser {
   username: string;
-  href?: string;
+  href: string;
+  timestamp?: number;
 }
 
-export interface AnalysisResult {
-  followers: InstagramUser[];
-  following: InstagramUser[];
-  pendingRequests: InstagramUser[];
+export type InstagramUserList = InstagramUser[];
 
-  mutual: InstagramUser[];
-
-  notFollowingBack: InstagramUser[];
-
-  fans: InstagramUser[];
+export interface InstagramData {
+  followers: InstagramUserList;
+  following: InstagramUserList;
+  pendingRequests: InstagramUserList;
 }
+
+export type AnalysisResult = InstagramData & {
+  mutual: InstagramUserList;
+  notFollowingBack: InstagramUserList;
+  fans: InstagramUserList;
+};
+
+export type InstagramTab = keyof AnalysisResult;

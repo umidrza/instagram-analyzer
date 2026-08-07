@@ -1,14 +1,14 @@
-interface InstagramStringData {
+export interface InstagramStringData {
   href: string;
   value: string;
   timestamp: number;
 }
 
-interface InstagramEntry {
+export interface InstagramFollowerDocument {
   string_list_data: InstagramStringData[];
 }
 
-interface FollowingEntry {
+export interface InstagramFollowingEntry {
   string_list_data: InstagramStringData[];
   title: string;
 }
@@ -18,18 +18,17 @@ export interface InstagramLabelValue {
   value: string;
 }
 
-export interface PendingRequestsDocument {
+export interface InstagramPendingRequestDocument {
   timestamp: number;
   label_values: InstagramLabelValue[];
 }
 
-interface FollowingDocument {
-  relationships_following: FollowingEntry[];
+export interface InstagramFollowingDocument {
+  relationships_following: InstagramFollowingEntry[];
 }
 
-
 export interface InstagramDocuments {
-  followers: InstagramEntry[];
-  following?: FollowingDocument;
-  pendingRequests?: PendingRequestsDocument[];
+  followers: InstagramFollowerDocument[];
+  following?: InstagramFollowingDocument;
+  pendingRequests?: InstagramPendingRequestDocument[];
 }

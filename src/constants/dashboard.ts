@@ -1,4 +1,6 @@
-export const DASHBOARD_TABS = [
+import type { InstagramTab } from "@/types/domain";
+
+export const DASHBOARD_TABS: ReadonlyArray<{ key: InstagramTab; label: string }> = [
   {
     key: "followers",
     label: "Followers",
@@ -22,5 +24,5 @@ export const DASHBOARD_TABS = [
   {
     key: "pendingRequests",
     label: "Pending Requests",
-  }
-] as const;
+  },
+];
